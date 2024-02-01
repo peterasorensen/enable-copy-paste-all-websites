@@ -34,11 +34,12 @@ Enable copy and paste functionality on websites that try to block it.
 
 To use this script:
 
-Ensure you have Tampermonkey installed in your Chrome browser.
-Click on the Tampermonkey icon in your browser and choose "Create a new script..."
-Delete the content that is present in the new script template.
-Copy and paste the script I provided above into the editor.
-Save the script by clicking File > Save or by pressing Ctrl + S (Cmd + S on Mac).
+1. Ensure you have Tampermonkey installed in your Chrome browser.
+2. Click on the Tampermonkey icon in your browser and choose "Create a new script..."
+3. Delete the content that is present in the new script template.
+4. Copy and paste the script I provided above into the editor.
+5. Save the script by clicking File > Save or by pressing Ctrl + S (Cmd + S on Mac).
+
 The @match *://*/* line in the metadata block tells Tampermonkey to run this script on every website. You can change this to be more specific if you only want it to run on certain sites.
 
 When you visit a website, this script will automatically execute and modify the oncopy attribute of each element, if it is set to return false. This should enable the copy functionality on most sites that use this method to prevent copying.
