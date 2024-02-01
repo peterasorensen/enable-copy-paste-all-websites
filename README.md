@@ -1,6 +1,8 @@
 # enable-copy-paste-all-websites
 Enable copy and paste functionality on websites that try to block it. 
 
+Helpful if you have other extensions like Google Translate that translates highlighted or copied text and your textbook readers try to block it. 
+
 ```javascript
 // ==UserScript==
 // @name         Enable Copy Function
@@ -43,3 +45,13 @@ To use this script:
 The @match *://*/* line in the metadata block tells Tampermonkey to run this script on every website. You can change this to be more specific if you only want it to run on certain sites.
 
 When you visit a website, this script will automatically execute and modify the oncopy attribute of each element, if it is set to return false. This should enable the copy functionality on most sites that use this method to prevent copying.
+
+
+## Example: Allow Copy Paste on McGraw Hill Connect readers
+1. Install the script as stated above. 
+2. Right click on the page and Inspect element.
+3. Hit Esc to pull up the bottom drawer.
+4. Navigate to Network request blocking.
+ <img width="537" alt="image" src="https://github.com/peterasorensen/enable-copy-paste-all-websites/assets/23510568/da3165c3-82fa-4735-b67a-e08bbfe8ba4a">
+5. Add this URL `prod.reader-ui.prod.mheducation.com/scripts.*.js`.
+This blocks McGraw Hill from loading the script that creates that annoying highlight pop-up.
