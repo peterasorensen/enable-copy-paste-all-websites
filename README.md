@@ -53,5 +53,6 @@ When you visit a website, this script will automatically execute and modify the 
 3. Hit Esc to pull up the bottom drawer.
 4. Navigate to Network request blocking.
  <img width="537" alt="image" src="https://github.com/peterasorensen/enable-copy-paste-all-websites/assets/23510568/da3165c3-82fa-4735-b67a-e08bbfe8ba4a">
+ 
 5. Add this URL `prod.reader-ui.prod.mheducation.com/scripts.*.js`.
 This blocks McGraw Hill from loading the script that creates that annoying highlight pop-up.
