@@ -1,7 +1,7 @@
 # enable-copy-paste-all-websites
 Enable copy and paste functionality on websites that try to block it. 
 
-```
+```javascript
 // ==UserScript==
 // @name         Enable Copy Function
 // @namespace    http://tampermonkey.net/
