@@ -10,27 +10,40 @@ Helpful if you have other extensions like Google Translate that translates highl
 // @version      0.1
 // @description  Enable copying on web pages that have disabled it
 // @author       peterasorensen
-// @match        *://*/*
-// @grant        none
+// @match        *://*.mheducation.com/*
+// @grant        GM_addStyle
+// @run-at       document-end
 // ==/UserScript==
 
 (function() {
-    'use strict';
-
-    // Function to replace oncopy attribute
-    function enableCopy(element) {
-        if(element.getAttribute('oncopy') === 'return false') {
-            element.setAttribute('oncopy', 'return true');
+    window.addEventListener('copy', function() {
+        console.log("running tampermonkey script");
+        // Function to replace oncopy and oncut attributes in HTML
+        function replaceOnCopyAndCut(html) {
+            return html.replace(/oncopy="return false"/g, 'oncopy="return true"')
+                       .replace(/oncut="return false"/g, 'oncut="return true"')
+                       .replace(/oncopy=&quot;return false&quot;/g, 'oncopy=&quot;return true&quot;')
+                       .replace(/oncut=&quot;return false&quot;/g, 'oncut=&quot;return true&quot;')
+                       .replace(/user-select: none;/g, 'user-select: text;');
         }
-    }
 
-    // Get all elements in the document
-    var allElements = document.getElementsByTagName('*');
+        // Get the entire HTML of the document
+        var html = document.documentElement.innerHTML;
 
-    // Loop through all elements and enable copy
-    for (var i = 0; i < allElements.length; i++) {
-        enableCopy(allElements[i]);
-    }
+        // Replace the attributes in the HTML
+        document.documentElement.innerHTML = replaceOnCopyAndCut(html);
+    });
+    GM_addStyle ( "                            \
+      * {                                      \
+      user-select: text !important;            \
+     -moz-user-select: text !important;        \
+     -ms-user-select: text !important;         \
+     -khtml-user-select: text !important;      \
+     -o-user-select: text !important;          \
+     -webkit-user-select: text !important;     \
+     -webkit-touch-callout: text !important;   \
+       }                                       \
+ " );
 })();
 ```
 
@@ -42,9 +55,9 @@ To use this script:
 4. Copy and paste the script I provided above into the editor.
 5. Save the script by clicking File > Save or by pressing Ctrl + S (Cmd + S on Mac).
 
-The @match *://*/* line in the metadata block tells Tampermonkey to run this script on every website. You can change this to be more specific if you only want it to run on certain sites.
+The above script is set to `*://*.mheducation.com/*`. The @match *://*/* line in the metadata block tells Tampermonkey to run this script on every website. You can change this to be more specific if you only want it to run on certain sites.
 
-When you visit a website, this script will automatically execute and modify the oncopy attribute of each element, if it is set to return false. This should enable the copy functionality on most sites that use this method to prevent copying.
+When you visit a website, this script will execute when you try to copy (CMD+C on Mac) and modify the oncopy attribute of each element, if it is set to return false. This should enable the copy functionality on most sites that use this method to prevent copying.
 
 
 ## Example: Allow Copy Paste on McGraw Hill Connect readers
